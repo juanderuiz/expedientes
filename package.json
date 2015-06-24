@@ -9,7 +9,8 @@
   "author": "",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "express": "~4.9.8"
+    "express": "~4.9.8",
+    "body-parser": "~1.13.1"
   },
   "devDependencies": {
     "supertest": "~1.0.1",

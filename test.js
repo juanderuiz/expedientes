@@ -57,3 +57,24 @@ describe('List all expedientes in /expedientes', function(){
   
 });
 
+describe('Create a new expediente', function(){
+
+  it('Returns a 201 status code', function(done){
+    
+    request(app)
+    .post('/expedientes')
+    .send('numero=00401/15&asunto=ClausulaSuelo')
+    .expect(201,done);
+  });
+
+  it('Return the expedient number', function(done){
+    
+    request(app)
+    .post('/expedientes')
+    .send('numero=00401/15&asunto=Clausula+Suelo+de+Juande')
+    .expect(/00401\/15/i, done);
+
+  });
+
+});
+
