@@ -10,7 +10,8 @@
   "license": "BSD-2-Clause",
   "dependencies": {
     "express": "~4.9.8",
-    "body-parser": "~1.13.1"
+    "body-parser": "~1.13.1",
+    "mongoose": "~4.0.6"
   },
   "devDependencies": {
     "supertest": "~1.0.1",
