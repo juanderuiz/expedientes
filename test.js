@@ -64,7 +64,7 @@ describe('Create a new expediente', function(){
     request(app)
     .post('/expedientes')
     .send('numero=00401/15&asunto=ClausulaSuelo')
-    .expect(201,done);
+    .expect(201, done);
     
   });
 
@@ -74,6 +74,15 @@ describe('Create a new expediente', function(){
     .post('/expedientes')
     .send('numero=00401/15&asunto=Clausula+Suelo+de+Juande')
     .expect(/00401\/15/i, done);
+
+  });
+
+  it('Validates expedient number and title', function(done){
+
+    request(app)
+    .post('/expedientes')
+    .send('numero=&asunto=')
+    .expect(400, done);
 
   });
 
