@@ -67,5 +67,20 @@ app.post('/expedientes', urlencode, function(req,res){
   });
 });
 
+app.delete('/expedientes/:numero', function(req,res){
+  //var exp = req.body;
+  var numero = req.params.numero;
+  var query = {'numero' : numero};
+
+  Expediente.remove(query, function(err){
+    if(err) throw err;
+
+    console.log("Borrado el expediente número: " + numero);
+    res.sendStatus(204);
+
+  });
+
+});
+
 //app.listen(3000);
 module.exports = app;

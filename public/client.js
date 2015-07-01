@@ -6,29 +6,30 @@ $(function(){
     event.preventDefault();
 
     var form = $(this);
-    var cityData = form.serialize();
+    var expedientesData = form.serialize();
 
     $('.alert').hide();
 
     $.ajax({
-      type: 'POST', url: '/expedientes', data: cityData
+      type: 'POST', url: '/expedientes', data: expedientesData
     })
     .error(function() {
       $('.alert').show();
     })
-    .success(function(cityName){
-      appendToList([cityName]);
+    .success(function(expNum){
+      appendToList([expNum]);
       form.trigger('reset');
     });
   });
 
-  function appendToList(cities) {
+  function appendToList(expedientes) {
+    //expedientes sólo contiene el campo "numero" de cada registro
     var list = [];
-    var content, city;
-    for(var i in cities){
-      city = cities[i];
-      content = '<a href="/cities/'+city+'">'+city+'</a>'+ // + // example on how to serve static images
-        ' <a href="#" data-city="'+city+'">'+
+    var content, expediente;
+    for(var i in expedientes){
+      expediente = expedientes[i];
+      content = '<a href="/expedientes/'+expediente+'">'+expediente+'</a>'+
+        ' <a href="#" data-expediente="'+expediente+'">'+
         '<img src="delete.png" width="15px"></a>';
       list.push($('<li>', { html: content }));
     }
@@ -37,7 +38,7 @@ $(function(){
   }
 
 
-  $('.city-list').on('click', 'a[data-city]', function (event) {
+  $('.expedientes-list').on('click', 'a[data-expediente]', function (event) {
     if(!confirm('Are you sure ?')){
       return false;
     }
@@ -46,7 +47,7 @@ $(function(){
 
     $.ajax({
       type: 'DELETE',
-      url: '/cities/' + target.data('city')
+      url: '/expedientes/' + target.data('expediente')
     }).done(function () {
       target.parents('li').remove();
     });

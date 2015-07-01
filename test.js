@@ -88,3 +88,15 @@ describe('Create a new expediente', function(){
 
 });
 
+describe('Delete a expediente', function(){
+
+  it('Returns a 204 status', function(done){
+
+    request(app)
+    .delete('/expedientes/11111')
+    .expect(204, done);
+
+  });
+
+});
+
