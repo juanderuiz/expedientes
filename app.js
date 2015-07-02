@@ -26,8 +26,6 @@ app.get('/', function(req,res){
 });
 
 app.get('/expedientes', function(req,res){
-  //res.send('OK');
-  //res.json(Object.keys(expedientes)); //Keys are the number of each expediente
   var query = {}, projection = {'numero':1, '_id':0};
   Expediente.find(query, projection, function(err,docs){
     if(err) throw err;
@@ -52,7 +50,7 @@ app.post('/expedientes', urlencode, function(req,res){
     if (err || docs.length){
       console.log("El expediente ya existe!");
     } else {
-
+      //Si NO existe, lo añado a la colección
       var expediente = new Expediente( {"numero": newExp.numero,
                     "asunto": newExp.asunto });
 
@@ -61,14 +59,12 @@ app.post('/expedientes', urlencode, function(req,res){
 
           console.dir("Expediente guardado!" + JSON.stringify(inserted));
           res.status(201).json(newExp.numero);
-          //callback(err, newExp.numero); //Usamos el numero del objeto original
       });
     };
   });
 });
 
 app.delete('/expedientes/:numero', function(req,res){
-  //var exp = req.body;
   var numero = req.params.numero;
   var query = {'numero' : numero};
 
