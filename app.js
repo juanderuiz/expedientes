@@ -64,6 +64,16 @@ app.post('/expedientes', urlencode, function(req,res){
   });
 });
 
+app.get('/expedientes/:numero', function(req,res){
+  var query = {'numero': req.params.numero};
+  Expediente.findOne(query, function (err,doc){
+    if(err) throw err;
+
+    console.log("Expediente número " + doc.numero + " recuperado!");
+    res.status(200).json(doc);
+  });
+});
+
 app.delete('/expedientes/:numero', function(req,res){
   var numero = req.params.numero;
   var query = {'numero' : numero};

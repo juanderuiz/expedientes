@@ -77,13 +77,21 @@ describe('Create a new expediente', function(){
 
   });
 
-  it('Validates expedient number and title', function(done){
+  it('Validates expediente numero and asunto', function(done){
 
     request(app)
     .post('/expedientes')
     .send('numero=&asunto=')
     .expect(400, done);
 
+  });
+
+});
+
+describe('Show a certain expediente', function(){
+
+  it('Returns a 200 status', function(done){
+     
   });
 
 });
