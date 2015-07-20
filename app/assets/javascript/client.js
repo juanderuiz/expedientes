@@ -23,14 +23,13 @@ $(function(){
   });
 
   function appendToList(expedientes) {
-    //expedientes sólo contiene el campo "numero" de cada registro
     var list = [];
     var content, expediente;
     for(var i in expedientes){
       expediente = expedientes[i];
-      content = '<a href="/expedientes/'+expediente+'">'+expediente+'</a>'+
-        ' <a href="#" data-expediente="'+expediente+'">'+
-        '<img src="delete.png" width="15px"></a>';
+      content = '<a href="/expedientes/'+expediente.numero+expediente.anyo+'">'+expediente.numero+'/'+expediente.anyo+'</a>'+
+        ' <a href="#" data-expediente="'+expediente.numero+expediente.anyo+'">'+
+        '<img src="assets/styles/delete.png" width="15px"></a>';
       list.push($('<li>', { html: content }));
     }
 
