@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-4 col-md-offset-4 text-center">
+    <h2>Nuevo Expediente</h2>
+    <div ng-show="missingInfo">
+      <p>Rellena todos los campos correctamente, gracias!</p>
+      <p>Ejemplo: "Número: 00203/15 y Asunto: Demanda Laboral"</p>
+    </div>
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label for="numero" class="col-sm-2 control-label">Número</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="numero" placeholder="xxxxx/yy" ng-model="expediente.numero">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="asunto" class="col-sm-2 control-label">Asunto</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="asunto" placeholder="This is about..." ng-model="expediente.asunto">
+        </div>
+      </div>
+      
+      <input class="btn btn-primary btn-lg btn-block" type="submit" ng-click="saveExpediente(expediente)" value="Crear Expediente">
+      
+    </form> 
+  </div>
+</div>

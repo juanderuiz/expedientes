@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 text-center">
+    <h4>Estás viendo el expediente {{expediente.numero}}/{{expediente.anyo}}
+    <a class="btn btn-danger" ng-click="deleteExpediente(expediente.numero,expediente.anyo);">Eliminar</a></h4>
+    <p style="background:#FCC">{{expediente.asunto}}</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 text-center">
+  	<a class="btn btn-primary" ng-href="#/expedientes/{{expediente.numero}}{{expediente.anyo}}/clientes">Clientes</a>
+  	<a class="btn btn-primary" ng-href="#/expedientes/{{expediente.numero}}{{expediente.anyo}}/info">Info</a>
+  	<a class="btn btn-primary" ng-href="#/expedientes/{{expediente.numero}}{{expediente.anyo}}/hitos">Hitos</a>
+  </div>
+</div>

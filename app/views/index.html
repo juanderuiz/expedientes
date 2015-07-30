@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="Expedientes">
 <head>
   <meta charset="UTF-8">
   <title>Los Expedientes de Carmen María</title>
-  <link rel="stylesheet" href="assets/styles/style.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <!--<link rel="stylesheet" href="assets/styles/style.css" />-->
 </head>
 <body>
+  <div class="container-fluid">
+    <a href="#/expedientes"><h1 class="text-center">Carmen María's Lawyer App</h1></a>
+    <div ng-view></div>
+  </div>  
 
-  <h1>Los Expedientes de Carmen María</h1>
-
-  <div class="alert">
+ <!-- <div class="alert">
     Por favor, respeta el formato XXXXX/YY !!
   </div>
 
@@ -20,7 +23,7 @@
     <input type="Submit">
   </form>
 
-  <ul class='expedientes-list'></ul>
+  <ul class='expedientes-list'></ul>-->
 
 
 <!-- Vendor -->
@@ -31,6 +34,12 @@
 <!-- App -->
   <script src="assets/javascript/app.js"></script>
   <script src="assets/javascript/routes.js"></script>
-  <script src="assets/javascript/client.js"></script>
+  <!--<script src="assets/javascript/client.js"></script>-->
+<!-- Controllers -->
+  <script src="assets/javascript/controllers/expedientesIndexController.js"></script>
+  <script src="assets/javascript/controllers/expedientesShowController.js"></script>
+  <script src="assets/javascript/controllers/expedientesNewController.js"></script>
+<!-- Services -->
+  <script src="assets/javascript/services/expediente.js"></script>
 </body>
 </html>

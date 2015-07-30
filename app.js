@@ -3,6 +3,9 @@ var app = express();
 var bodyParser = require('body-parser');
 var urlencode = bodyParser.urlencoded({extended: false});
 
+// parse application/json
+app.use(bodyParser.json());
+
 //MongoDB and Mongoose
 var mongoose = require("mongoose");
 mongoose.connect('mongodb://localhost:27017/expedientes');
@@ -34,22 +37,21 @@ app.get('/', function(req,res){
 });
 
 app.get('/expedientes', function(req,res){
-  var query = {}, projection = {'numero':1, 'anyo':1, '_id':0};
+  var query = {}, projection = {'numero':1, 'anyo':1, 'asunto':1, '_id':0};
   Expediente.find(query, projection, function(err,docs){
     if(err) throw err;
 
     docs = docs.map(function(doc) { return {"numero": doc.numero, 
-                                              "anyo": doc.anyo} });
+                                              "anyo": doc.anyo,
+                                            "asunto": doc.asunto} });
     res.json(docs);
   });
 });
 
-app.post('/expedientes', urlencode, function(req,res){
+app.post('/expedientes', function(req,res){
   var newExp = req.body;
-  var nuevoValor = separarNumero(newExp.numero);
-  newExp.numero = nuevoValor[0];
-  newExp.anyo = nuevoValor[1];
-  //Compruebo que el número y el asunto del expediente se han completado
+  
+  //Compruebo que el número, anyo y el asunto se han completado
   if (!newExp.numero || !newExp.anyo || !newExp.asunto){
     console.log("Faltan datos en el expediente!");
     res.sendStatus(400);
@@ -61,8 +63,9 @@ app.post('/expedientes', urlencode, function(req,res){
   Expediente.find(query, function (err, docs){
     if (err || docs.length){
       console.log("El expediente ya existe!");
+      //res.sendStatus(400);
+      //return false;
     } else {
-      //Eliminar la barra separadora "/" antes de guardar
       //Si NO existe, lo añado a la colección
       var expediente = new Expediente( {"numero": newExp.numero,
                            "anyo": newExp.anyo, "asunto": newExp.asunto });
@@ -78,9 +81,9 @@ app.post('/expedientes', urlencode, function(req,res){
 });
 
 app.get('/expedientes/:numero', function(req,res){
-  var parametro = parseInt(req.params.numero);
-  var numero = (Math.floor(parametro/100)).toString();
-  var anyo = (parametro%100).toString();
+  var parametro = req.params.numero;
+  var numero = parametro.slice(0,5);
+  var anyo = parametro.slice(5,7);
   var query = {'numero' : numero, 'anyo': anyo};
 
   Expediente.findOne(query, function (err,doc){
@@ -97,9 +100,9 @@ app.get('/expedientes/:numero', function(req,res){
 });
 
 app.delete('/expedientes/:numero', function(req,res){
-  var parametro = parseInt(req.params.numero);
-  var numero = (Math.floor(parametro/100)).toString();
-  var anyo = (parametro%100).toString();
+  var parametro = req.params.numero;
+  var numero = parametro.slice(0,5);
+  var anyo = parametro.slice(5,7);
   var query = {'numero' : numero, 'anyo': anyo};
 
   Expediente.remove(query, function(err){
